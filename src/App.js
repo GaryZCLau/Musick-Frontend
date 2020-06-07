@@ -23,7 +23,8 @@ class App extends React.Component {
         "Authorization": "Bearer BQAUWR2EtBccn2iMSLIapSRU2WVpkACrcPSvHffpfzTuSaX96Sn9aMYfueqzqcNdkEt6iJHK5EjgIC95sKVQUA2LlFW9PHvexEpnJvZFpxnHfdt4ZVKmsdpibtHYqCLMjxbCdX6TaiZf3lr5RxzekakEoESVDHaY&refresh_token=AQDPF9FxD7iY9TsJW3DNZBwPr7XVmp_QcwBJq_EXDdsmk8D3Jt1jOXAdNWzFH_bL-zN8dHf-dZiJFtIiQQO6tIwb20-ztDLDjU3-mKdQ3Iz7wNU2yGwYiRE-jnXYHiFNMUw"
       }
     }).then(r=>r.json()).then((playlistObj) => {
-      playlistObj.items.map((obj) => {console.log(obj.track)})
+      playlistObj
+      // .items.map((obj) => {console.log(obj.track)})
       // console.log(playlistObj.items)
       // console.log(playlistObj.items[0].track)
     })
