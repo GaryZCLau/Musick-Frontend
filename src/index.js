@@ -3,12 +3,63 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import {BrowserRouter} from 'react-router-dom'
-// import * as serviceWorker from './serviceWorker';
+import {createStore, combineReducers} from 'redux'
+import {Provider} from 'react-redux'
+
+// spotify 
+let initialSpotify = {
+  spotifyList: []
+}
+
+let spotifyReducer = (state = initialSpotify, action) => {
+  switch (action.type) {
+    case "SET_SPOTIFY": return {spotifyList: action.payload}
+    default: return state
+  }
+}
+
+// user
+let initialUser = {
+  id: 0,
+  name: "",
+  status: "",
+  image: "",
+  token: "",
+  activities: []
+}
+
+let userReducer = (state = initialUser, action) => {
+  switch(action.type) {
+    case "SET_USER_INFO": return {
+      ...state,
+      id: action.payload.user.id,
+      name: action.payload.user.name,
+      status: action.payload.user.status,
+      image: action.payload.user.image,
+      token: action.payload.token,
+      activities: action.payload.user.activities
+    }
+    default: return state
+  }
+}
+
+let combinedReducers = {
+  spotifyInfo: spotifyReducer,
+  userInfo: userReducer
+}
+
+let rootReducer = combineReducers(combinedReducers)
+
+let storeObj = createStore(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+
 
 ReactDOM.render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>
+  <Provider store={storeObj}>
+    <BrowserRouter>
+      <App /> 
+    </BrowserRouter>
+  </Provider>
+
   ,document.getElementById('root')
 );
 
@@ -16,7 +67,3 @@ ReactDOM.render(
 
 
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-// serviceWorker.unregister();

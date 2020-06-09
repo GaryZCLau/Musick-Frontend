@@ -7,23 +7,16 @@ import Sound from 'react-sound'
 
 class App extends React.Component {
 
-  state = {
-    user: {
-      id: 0,
-      username: ""
-    }
-  }
-
   componentDidMount(){
    
     fetch('https://api.spotify.com/v1/playlists/08Lsn1W8n4HgJK5HsLZVlz/tracks', {
       headers: {
         "content-type": "application/json",
         "accept": "application/json",
-        "Authorization": "Bearer BQAUWR2EtBccn2iMSLIapSRU2WVpkACrcPSvHffpfzTuSaX96Sn9aMYfueqzqcNdkEt6iJHK5EjgIC95sKVQUA2LlFW9PHvexEpnJvZFpxnHfdt4ZVKmsdpibtHYqCLMjxbCdX6TaiZf3lr5RxzekakEoESVDHaY&refresh_token=AQDPF9FxD7iY9TsJW3DNZBwPr7XVmp_QcwBJq_EXDdsmk8D3Jt1jOXAdNWzFH_bL-zN8dHf-dZiJFtIiQQO6tIwb20-ztDLDjU3-mKdQ3Iz7wNU2yGwYiRE-jnXYHiFNMUw"
+        "Authorization": "Bearer BQBMz8P7Px9mpNU4zrZlGuA9tYoE7Ir6Bx__X7JPwmRxDmvccVPtyV4Brb6Jmzdvg3ykEOwEO0gvwcSPKQzVJHXy06LeiO7svc1Z89iZBn1s3vEx5ICrtaPrjDCQnBr07wNhvG-8GFe0-5cDz3AK5YFxA7aUP8NN&refresh_token=AQCfc4BkZQaQa0ow0MsztLYqjl_YsAxMKeHak5MW12sXjOaG4xoWHrTGhUr-kgW9yg6N4Vphew_Jda8Ccfux9M39-0bcxumLz-x0Yo_UgdYdBPgjMvskaUDz3zN_Qdp-DCE"
       }
     }).then(r=>r.json()).then((playlistObj) => {
-      playlistObj
+      console.log(playlistObj.items[0].track)
       // .items.map((obj) => {console.log(obj.track)})
       // console.log(playlistObj.items)
       // console.log(playlistObj.items[0].track)
@@ -96,6 +89,7 @@ class App extends React.Component {
         <Switch>
           <Route path="/login" render={ this.renderForm } />
           <Route path="/register" render={ this.renderForm } />
+          <Route path="/profile" render={}/>
           <Route render={ () => <p>Page not Found</p> } />
         </Switch>
       </div>
