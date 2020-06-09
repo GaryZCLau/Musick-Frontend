@@ -1,10 +1,11 @@
 import React from 'react'
+import LoginForm from './LoginForm'
+import RegisterForm from './RegisterForm'
 
 class Home extends React.Component {
 
     state = {
         formLogin: true,
-
     }
 
     handleLogin = () => {
@@ -30,23 +31,13 @@ class Home extends React.Component {
                 <p className="loginP" onClick={this.handleLogin}>Login</p>
                 <p className="registerP" onClick={this.handleRegister}>Register</p>
                 {this.state.formLogin ? 
-                    <form onSubmit={this.handleSubmit}>
-                      <label htmlFor="name">Name:</label>
-                      <input type="text" autoComplete="off" name="name" value={name} onChange={this.handleChange}/>
-                      <label htmlFor="password">Password:</label>
-                      <input type="password" autoComplete="off" name="password" value={password} onChange={this.handleChange}/>
-                      <input type="submit" value="Submit"/>
-                    </form>
+                    <LoginForm handleLogin={this.props.handleLogin}/>
                     :
-                    <form onSubmit={this.handleSubmit}>
-                        <label htmlFor="name">Name:</label>
-                        <input type="text" autoComplete="off" name="name" value={name} onChange={this.handleChange}/>
-                        <label htmlFor="password">Password:</label>
-                        <input type="password" autoComplete="off" name="password" value={password} onChange={this.handleChange}/>
-                        <input type="submit" value="Submit"/>
-                    </form>
+                    <RegisterForm handleRegister={this.props.handleRegister}/>
                 }
             </div>
         )
     }
 }
+
+export default Home

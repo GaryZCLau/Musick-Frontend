@@ -5,14 +5,14 @@ const NavBar = () => {
   return(
     <ul className="nav">
       <li>
-        <NavLink to="/">Home</NavLink>
+        <NavLink to="/home">Home</NavLink>
       </li>
-      <li>
+      {/* <li>
         <NavLink to="/login">Login</NavLink>
       </li>
       <li>
         <NavLink to="/register">Register</NavLink>
-      </li>
+      </li> */}
       <li>
         <NavLink to="/profile">Profle</NavLink>
       </li>

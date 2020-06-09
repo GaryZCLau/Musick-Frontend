@@ -4,6 +4,8 @@ import {Switch, Route, withRouter} from 'react-router-dom'
 import Form from './Form'
 import NavBar from './NavBar'
 import Sound from 'react-sound'
+import Home from './Home'
+import Profile from './Profile'
 
 class App extends React.Component {
 
@@ -13,7 +15,7 @@ class App extends React.Component {
       headers: {
         "content-type": "application/json",
         "accept": "application/json",
-        "Authorization": "Bearer BQBMz8P7Px9mpNU4zrZlGuA9tYoE7Ir6Bx__X7JPwmRxDmvccVPtyV4Brb6Jmzdvg3ykEOwEO0gvwcSPKQzVJHXy06LeiO7svc1Z89iZBn1s3vEx5ICrtaPrjDCQnBr07wNhvG-8GFe0-5cDz3AK5YFxA7aUP8NN&refresh_token=AQCfc4BkZQaQa0ow0MsztLYqjl_YsAxMKeHak5MW12sXjOaG4xoWHrTGhUr-kgW9yg6N4Vphew_Jda8Ccfux9M39-0bcxumLz-x0Yo_UgdYdBPgjMvskaUDz3zN_Qdp-DCE"
+        "Authorization": "Bearer BQAWGaC50KfuT9ng0rM7ZgymcCdSvvjmCZ-hIHiV7AJ4voPBR7CD3PuiJnLczFZaVNNTUvVH1Yxm0rSdGchHEpHZWQLX2dS9kpo-IBw4xda-hgQaw7F-BZfCMrAjPemXlcgdiWRVxe7qDUTQnogXaoYdKrE0ebXz&refresh_token=AQBMtdeOYxPzqgepH4i4p-dx6BA_VmyGc14tRjDbAixxEnz4DKt6pNtYk0EbZY2XbRvKuvi5RnZLVDF8R02wVqbvckrFyN6MZpj8KlZ-EX3JQSKb0-elaSufIz6vn9IDkdQ"
       }
     }).then(r=>r.json()).then((playlistObj) => {
       console.log(playlistObj.items[0].track)
@@ -23,21 +25,21 @@ class App extends React.Component {
     })
   }
 
-  handleLoginSubmit = (userInfo) => {
+  handleLogin = (loginState) => {
     console.log("Login form has been submitted")
     fetch("http://localhost:3000/users/login", {
       method: "POST",
       headers: {
         "content-type": "application/json"
       },
-      body: JSON.stringify(userInfo)
+      body: JSON.stringify(loginState)
     })
     .then(r => r.json())
     .then(this.handleResponse)
   }
 
 
-  handleRegisterSubmit = (userInfo) => {
+  handleRegister = (registerState) => {
     console.log("Register form has been submitted")
 
     fetch("http://localhost:3000/users", {
@@ -45,7 +47,12 @@ class App extends React.Component {
       headers: {
         "content-type": "application/json"
       },
-      body: JSON.stringify(userInfo)
+      body: JSON.stringify({
+        name: registerState.name,
+        password: registerState.password,
+        image: "",
+        status: ""
+      })
     })
       .then(r => r.json())
       .then(this.handleResponse)
@@ -87,9 +94,10 @@ class App extends React.Component {
         {/* <Sound url="https://p.scdn.co/mp3-preview/4d48b1d0d39b2710df6893c6a994013e9f8eee37?cid=8fcacfb4144f4d239cd08a0ad79df707" volume="10" playStatus="PLAYING"/> */}
         {/* <iframe src="https://p.scdn.co/mp3-preview/4d48b1d0d39b2710df6893c6a994013e9f8eee37?cid=8fcacfb4144f4d239cd08a0ad79df707" title="song"></iframe> */}
         <Switch>
-          <Route path="/login" render={ this.renderForm } />
-          <Route path="/register" render={ this.renderForm } />
-          <Route path="/profile" render={}/>
+          <Route path="/home" render={ () => <Home handleLogin={this.handleLogin} handleRegister={this.handleRegister}/>}/>
+          {/* <Route path="/login" render={ this.renderForm } />
+          <Route path="/register" render={ this.renderForm } /> */}
+          <Route path="/profile" render = { () => <Profile /> }/>
           <Route render={ () => <p>Page not Found</p> } />
         </Switch>
       </div>
