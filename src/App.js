@@ -1,21 +1,31 @@
 import React from 'react'
 import './App.css'
-import {Switch, Route, withRouter} from 'react-router-dom'
-import Form from './Form'
 import NavBar from './NavBar'
 import Sound from 'react-sound'
 import Home from './Home'
 import Profile from './Profile'
+import {Switch, Route, withRouter} from 'react-router-dom'
+import {connect} from 'react-redux'
 
 class App extends React.Component {
 
   componentDidMount(){
    
+    if (localStorage.token) {
+      fetch("http://localhost:3000/users/stay_logged_in", {
+        headers: {
+          "Authorization": localStorage.token
+        }
+      })
+      .then(r => r.json())
+      .then(this.handleResponse)
+    }
+
     fetch('https://api.spotify.com/v1/playlists/08Lsn1W8n4HgJK5HsLZVlz/tracks', {
       headers: {
         "content-type": "application/json",
         "accept": "application/json",
-        "Authorization": "Bearer BQAWGaC50KfuT9ng0rM7ZgymcCdSvvjmCZ-hIHiV7AJ4voPBR7CD3PuiJnLczFZaVNNTUvVH1Yxm0rSdGchHEpHZWQLX2dS9kpo-IBw4xda-hgQaw7F-BZfCMrAjPemXlcgdiWRVxe7qDUTQnogXaoYdKrE0ebXz&refresh_token=AQBMtdeOYxPzqgepH4i4p-dx6BA_VmyGc14tRjDbAixxEnz4DKt6pNtYk0EbZY2XbRvKuvi5RnZLVDF8R02wVqbvckrFyN6MZpj8KlZ-EX3JQSKb0-elaSufIz6vn9IDkdQ"
+        "Authorization": "Bearer BQBJrUVyo-tZcBUYT058qrqRl-_PesefYNJVsM5cDLoRg28R-Mrk8FG0VUEtwN8U-z0OzMEQjyZ0WdKuGhCULkaTpNPmweyQrEe0j2RczKKpqaiAO7te_NQI81cWuF5YdxOGKtln7IznKXGtkRKqdCzxFDaNW2JN&refresh_token=AQBDMSL1caw1fKOvYFikknKOQKE-_ZsaR2cVJ9E6m29-VSRzlvN7qvJKS3kwKZzrtRCoqDb80pfC8dtaBLopuvtn4XgDjAiKQu54VGscl3ftrZ_gy6d3ScWH2Y0kA0kUgao"
       }
     }).then(r=>r.json()).then((playlistObj) => {
       console.log(playlistObj.items[0].track)
@@ -58,29 +68,18 @@ class App extends React.Component {
       .then(this.handleResponse)
   }
 
-
   handleResponse = (resp) => {
-    if (resp.id) {
-      this.setState({
-        user: resp
-      })
-    } else {
-      alert(resp.message)
-    }
+    localStorage.token = resp.token
+    this.props.setUserInfo(resp)
+    // console.log(resp)
+    this.props.history.push("/profile")
   }
 
-
-  renderForm = (routerProps) => {
-    if(routerProps.location.pathname === "/login"){
-      return <Form
-        formName="Login Form"
-        handleSubmit={this.handleLoginSubmit}
-      />
-    } else if (routerProps.location.pathname === "/register") {
-      return <Form
-        formName="Register Form"
-        handleSubmit={this.handleRegisterSubmit}
-      />
+  renderProfile = (routerProps) => {
+    if (this.props.token) {
+      return <Profile />
+    } else {
+      this.props.history.push("/home")
     }
   }
 
@@ -95,9 +94,7 @@ class App extends React.Component {
         {/* <iframe src="https://p.scdn.co/mp3-preview/4d48b1d0d39b2710df6893c6a994013e9f8eee37?cid=8fcacfb4144f4d239cd08a0ad79df707" title="song"></iframe> */}
         <Switch>
           <Route path="/home" render={ () => <Home handleLogin={this.handleLogin} handleRegister={this.handleRegister}/>}/>
-          {/* <Route path="/login" render={ this.renderForm } />
-          <Route path="/register" render={ this.renderForm } /> */}
-          <Route path="/profile" render = { () => <Profile /> }/>
+          <Route path="/profile" render = { this.renderProfile}/>
           <Route render={ () => <p>Page not Found</p> } />
         </Switch>
       </div>
@@ -105,4 +102,22 @@ class App extends React.Component {
   }
 }
 
-export default App;
+let setUserInfo = (resp) => {
+  return {
+    type: "SET_USER_INFO",
+    payload: resp
+  }
+}
+
+let mapStateToProps = (globalState) => {
+  return {
+    token: globalState.userInformation.token
+  }
+}
+
+let mapDispatchToProps = {
+  setUserInfo: setUserInfo
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(App))

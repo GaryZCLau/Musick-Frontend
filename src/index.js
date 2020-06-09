@@ -19,7 +19,9 @@ let spotifyReducer = (state = initialSpotify, action) => {
 }
 
 // user
-let initialUser = {
+
+
+let initialUserState = {
   id: 0,
   name: "",
   status: "",
@@ -28,9 +30,11 @@ let initialUser = {
   activities: []
 }
 
-let userReducer = (state = initialUser, action) => {
+let userReducer = (state = initialUserState, action) => {
   switch(action.type) {
-    case "SET_USER_INFO": return {
+    case "SET_USER_INFO":
+      // console.log(state)
+      return {
       ...state,
       id: action.payload.user.id,
       name: action.payload.user.name,
@@ -45,7 +49,7 @@ let userReducer = (state = initialUser, action) => {
 
 let combinedReducers = {
   spotifyInfo: spotifyReducer,
-  userInfo: userReducer
+  userInformation: userReducer
 }
 
 let rootReducer = combineReducers(combinedReducers)
