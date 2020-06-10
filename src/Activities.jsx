@@ -13,7 +13,7 @@ class Activities extends React.Component {
 
         return(
             <li>
-                Guessed song: {this.props.actObj.title} 
+                Guessed song: {this.props.actObj.title}  
                 <button onClick={this.handleDelete}>X</button>
             </li>
 

@@ -13,6 +13,7 @@ class GameContainer extends React.Component {
             return <Game 
                 trackObj={singleTrackObj}
                 key={singleTrackObj.track.name}
+                handleActSubmit={this.props.handleActSubmit}
             />
         })
 

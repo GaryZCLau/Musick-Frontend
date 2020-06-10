@@ -36,20 +36,24 @@ let userReducer = (state = initialUserState, action) => {
     case "SET_USER_INFO":
       // console.log(state)
       return {
-      ...state,
-      id: action.payload.user.id,
-      name: action.payload.user.name,
-      status: action.payload.user.status,
-      image: action.payload.user.image,
-      token: action.payload.token,
-      activities: action.payload.user.activities
-    }
+        ...state,
+        id: action.payload.user.id,
+        name: action.payload.user.name,
+        status: action.payload.user.status,
+        image: action.payload.user.image,
+        token: action.payload.token,
+        activities: action.payload.user.activities
+      }
     case "DELETE_ACT":
-    return {
-      ...state, activities: state.activities.filter((singleAct) => {
-        return singleAct.id !== action.payload.id
-      })
-    }
+      return {
+        ...state, activities: state.activities.filter((singleAct) => {
+          return singleAct.id !== action.payload.id
+        })
+      }
+    case "ADD_ACT":
+      return {
+        ...state, activities: [...state.activities, action.payload]
+      }
     default: return state
   }
 }

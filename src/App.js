@@ -1,7 +1,7 @@
 import React from 'react'
 import './App.css'
 import NavBar from './NavBar'
-import Sound from 'react-sound'
+// import Sound from 'react-sound'
 import Home from './Home'
 import Profile from './Profile'
 import GameContainer from './GameContainer.jsx'
@@ -26,7 +26,7 @@ class App extends React.Component {
       headers: {
         "content-type": "application/json",
         "accept": "application/json",
-        "Authorization": "Bearer BQDgxdJXhi1OGSumCSkuH3f3x3FpvQMlIn0EC5ES1G6c3Fh7QWCEn3xnaOvb9pUiK6_ZTYfyQnt8Req4NP_tDXTNCFdVzoncrSK5_FcDBB_k6unUFB2YjjBPnReGDbUYO7qBCXhBFJW8TzbFQQrB6plB0H-Dvzqn&refresh_token=AQAw1qpDgcUAB07P4TR6Gg8GuEsgaXMCcjUy47mVxb9XbKvOL1UcNv7_YePOqMRwBOOGJE_L6LwffbRJZ45a1XGz2g8yXueqjDElNFVhnRbnvrACtSqX_qopAHnrkQaxZTY"
+        "Authorization": "Bearer BQASnk1uOwM8mcVgGptW41AoDo1Ekg9trU3KWn1uuBbroM4q1-0_5FXvX4I74lZSPqgFtsC8HM5r5UbzF6rt3STshOCm_4HwYKhY-q3V1kdRTIviCg3_gXSMvoPP5QB-XiosIDBTwx3KNO76rs1Ad48gZPrpChwn&refresh_token=AQCSGXyxrRIVWXqu0THf2e1Xua1WPCAQZuD2ukTPpbBNVMB9l6rBT6RSkS794W8isxDWApBB-37F-1MfOwj69-DVCaHCIfljWKLSz6ARgBEwSsADggrdGWBR_rfqxlRnOck"
       }
     }).then(r=>r.json()).then((playlistObj) => {
       this.props.setSpotify(playlistObj.items)
@@ -101,10 +101,37 @@ class App extends React.Component {
     }
   }
 
+  renderGame = () => {
+    if (this.props.token) {
+      return <GameContainer handleActSubmit={this.handleActSubmit}/>
+    } else {
+      this.props.history.push("/home")
+    }
+  }
+
+  handleActSubmit = (songTitle) => {
+    let userId = this.props.id
+    fetch("http://localhost:3000/activities", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        title: songTitle,
+        user_id: userId
+      })
+    }).then(r=>r.json())
+    .then((newAct) => {
+      this.props.newAct(newAct)
+    })
+  }
+
   render(){
     // this.url = "https://p.scdn.co/mp3-preview/4d48b1d0d39b2710df6893c6a994013e9f8eee37?cid=8fcacfb4144f4d239cd08a0ad79df707";
     // this.audio = new Audio(this.url)
     // this.audio.play()
+
+    // console.log(this.props)
     return (
       <div className="App">
         <NavBar/>
@@ -112,7 +139,7 @@ class App extends React.Component {
         {/* <iframe src="https://p.scdn.co/mp3-preview/4d48b1d0d39b2710df6893c6a994013e9f8eee37?cid=8fcacfb4144f4d239cd08a0ad79df707" title="song"></iframe> */}
         <Switch>
           <Route path="/home" render={this.renderHome}/>
-          <Route path="/game" component={GameContainer}/>
+          <Route path="/game" render={this.renderGame}/>
           <Route path="/profile" render = {this.renderProfile}/>
           <Route render={ () => <p>Page not Found</p> } />
         </Switch>
@@ -142,16 +169,25 @@ let deleteAct = (deletedAct) => {
   }
 }
 
+let newAct = (createdAct) => {
+  return {
+    type: "ADD_ACT",
+    payload: createdAct
+  }
+}
+
 let mapStateToProps = (globalState) => {
   return {
-    token: globalState.userInformation.token
+    token: globalState.userInformation.token,
+    id: globalState.userInformation.id
   }
 }
 
 let mapDispatchToProps = {
   setUserInfo: setUserInfo,
   setSpotify: setSpotify,
-  deleteAct: deleteAct
+  deleteAct: deleteAct,
+  newAct: newAct
 }
 
 
