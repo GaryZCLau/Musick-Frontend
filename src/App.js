@@ -4,6 +4,7 @@ import NavBar from './NavBar'
 import Sound from 'react-sound'
 import Home from './Home'
 import Profile from './Profile'
+import GameContainer from './GameContainer.jsx'
 import {Switch, Route, withRouter} from 'react-router-dom'
 import {connect} from 'react-redux'
 
@@ -25,10 +26,10 @@ class App extends React.Component {
       headers: {
         "content-type": "application/json",
         "accept": "application/json",
-        "Authorization": "Bearer BQBJrUVyo-tZcBUYT058qrqRl-_PesefYNJVsM5cDLoRg28R-Mrk8FG0VUEtwN8U-z0OzMEQjyZ0WdKuGhCULkaTpNPmweyQrEe0j2RczKKpqaiAO7te_NQI81cWuF5YdxOGKtln7IznKXGtkRKqdCzxFDaNW2JN&refresh_token=AQBDMSL1caw1fKOvYFikknKOQKE-_ZsaR2cVJ9E6m29-VSRzlvN7qvJKS3kwKZzrtRCoqDb80pfC8dtaBLopuvtn4XgDjAiKQu54VGscl3ftrZ_gy6d3ScWH2Y0kA0kUgao"
+        "Authorization": "Bearer BQDgxdJXhi1OGSumCSkuH3f3x3FpvQMlIn0EC5ES1G6c3Fh7QWCEn3xnaOvb9pUiK6_ZTYfyQnt8Req4NP_tDXTNCFdVzoncrSK5_FcDBB_k6unUFB2YjjBPnReGDbUYO7qBCXhBFJW8TzbFQQrB6plB0H-Dvzqn&refresh_token=AQAw1qpDgcUAB07P4TR6Gg8GuEsgaXMCcjUy47mVxb9XbKvOL1UcNv7_YePOqMRwBOOGJE_L6LwffbRJZ45a1XGz2g8yXueqjDElNFVhnRbnvrACtSqX_qopAHnrkQaxZTY"
       }
     }).then(r=>r.json()).then((playlistObj) => {
-      console.log(playlistObj.items[0].track)
+      this.props.setSpotify(playlistObj.items)
       // .items.map((obj) => {console.log(obj.track)})
       // console.log(playlistObj.items)
       // console.log(playlistObj.items[0].track)
@@ -77,9 +78,26 @@ class App extends React.Component {
 
   renderProfile = (routerProps) => {
     if (this.props.token) {
-      return <Profile />
+      return <Profile deleteActivity={this.deleteActivity}/>
     } else {
       this.props.history.push("/home")
+    }
+  }
+
+  deleteActivity = (actId) => {
+    fetch(`http://localhost:3000/activities/${actId}`, {
+      method: "DELETE"
+    }).then(r => r.json())
+    .then((deletedAct) => {
+      this.props.deleteAct(deletedAct)
+    })
+  }
+
+  renderHome = () => {
+    if (this.props.token) {
+      this.props.history.push("/profile")
+    } else {
+      return <Home handleLogin={this.handleLogin} handleRegister={this.handleRegister}/>
     }
   }
 
@@ -93,8 +111,9 @@ class App extends React.Component {
         {/* <Sound url="https://p.scdn.co/mp3-preview/4d48b1d0d39b2710df6893c6a994013e9f8eee37?cid=8fcacfb4144f4d239cd08a0ad79df707" volume="10" playStatus="PLAYING"/> */}
         {/* <iframe src="https://p.scdn.co/mp3-preview/4d48b1d0d39b2710df6893c6a994013e9f8eee37?cid=8fcacfb4144f4d239cd08a0ad79df707" title="song"></iframe> */}
         <Switch>
-          <Route path="/home" render={ () => <Home handleLogin={this.handleLogin} handleRegister={this.handleRegister}/>}/>
-          <Route path="/profile" render = { this.renderProfile}/>
+          <Route path="/home" render={this.renderHome}/>
+          <Route path="/game" component={GameContainer}/>
+          <Route path="/profile" render = {this.renderProfile}/>
           <Route render={ () => <p>Page not Found</p> } />
         </Switch>
       </div>
@@ -109,6 +128,20 @@ let setUserInfo = (resp) => {
   }
 }
 
+let setSpotify = (resp) => {
+  return {
+    type: "SET_SPOTIFY",
+    payload: resp
+  }
+}
+
+let deleteAct = (deletedAct) => {
+  return {
+    type: "DELETE_ACT",
+    payload: deletedAct
+  }
+}
+
 let mapStateToProps = (globalState) => {
   return {
     token: globalState.userInformation.token
@@ -116,7 +149,9 @@ let mapStateToProps = (globalState) => {
 }
 
 let mapDispatchToProps = {
-  setUserInfo: setUserInfo
+  setUserInfo: setUserInfo,
+  setSpotify: setSpotify,
+  deleteAct: deleteAct
 }
 
 

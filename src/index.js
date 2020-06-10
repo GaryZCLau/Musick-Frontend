@@ -7,13 +7,14 @@ import {createStore, combineReducers} from 'redux'
 import {Provider} from 'react-redux'
 
 // spotify 
-let initialSpotify = {
+let initialSpotifyState = {
   spotifyList: []
 }
 
-let spotifyReducer = (state = initialSpotify, action) => {
+let spotifyReducer = (state = initialSpotifyState, action) => {
   switch (action.type) {
-    case "SET_SPOTIFY": return {spotifyList: action.payload}
+    case "SET_SPOTIFY": 
+      return {...state, spotifyList: action.payload}
     default: return state
   }
 }
@@ -43,12 +44,18 @@ let userReducer = (state = initialUserState, action) => {
       token: action.payload.token,
       activities: action.payload.user.activities
     }
+    case "DELETE_ACT":
+    return {
+      ...state, activities: state.activities.filter((singleAct) => {
+        return singleAct.id !== action.payload.id
+      })
+    }
     default: return state
   }
 }
 
 let combinedReducers = {
-  spotifyInfo: spotifyReducer,
+  spotify: spotifyReducer,
   userInformation: userReducer
 }
 
