@@ -4,6 +4,13 @@ import {connect} from 'react-redux'
 
 class GameContainer extends React.Component {
 
+    // state for counter, hardcode [0], [1] each individual song
+
+    componentDidMount(){
+        console.log("hello")
+        this.props.setRandomSongs()
+    }
+
     render(){
         // console.log("gamecontainer")
         // console.log(this.props.spotifyList)
@@ -17,9 +24,12 @@ class GameContainer extends React.Component {
             />
         })
 
+        // let randomSong = this.props.spotifyList[Math.floor(this.props.spotifyList.length * Math.random())]
+
         return(
             <div>
                 {spotifyArray}
+                {/* <Game trackObj={randomSong} handleActSubmit={this.props.handleActSubmit}/> */}
             </div>
         )
     }
@@ -27,8 +37,12 @@ class GameContainer extends React.Component {
 
 let mapStateToProps = (globalState) => {
     return {
-        spotifyList: globalState.spotify.spotifyList
+        spotifyList: globalState.spotify.currentPlaying
     }
   }
 
-export default connect(mapStateToProps)(GameContainer)
+let mapDispatchToProps = {setRandomSongs: () => {
+    return {type: "SET_RANDOM_SONGS"}
+}}
+
+export default connect(mapStateToProps, mapDispatchToProps)(GameContainer)

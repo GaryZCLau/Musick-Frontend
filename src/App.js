@@ -26,12 +26,12 @@ class App extends React.Component {
       headers: {
         "content-type": "application/json",
         "accept": "application/json",
-        "Authorization": "Bearer BQCwENeapZRm1-zMACtK_q20FurYdJ9V4CDsn5QIpI4-uDu1IAdZMC3mL0LxClOcJZ4pGPqey7BqbzkczEHBSj2B8U6FMwyJw3OPDzMPxiCgMBDunOeP8KFuBJTPVemAlWUOS0x5riMRReibpSvBpojA7QWoAIdd&refresh_token=AQDjudSjouss0Y5t8Lh8OBI8mCJ40RIeRlHgLdCuGz1sErYZL1vsEWyXdBDM7edR3-oKGnDilHVO3H9S-Ju19jB84tZJNoG7AtxTjVYKfZyBiSSy7zCw5L6Rso1FMnjinEc"
+        "Authorization": "Bearer BQD84GGsX1LobLw9eRFim__Jq6GOPqUMOibbCCpzc-zhLtFhD05hCO3lEMIvv1t3TidU8wQU7ryn9e6cM-2T2wjlOJDfTU2uPLtTWQiZDDNEIjA1XaQAIALzWlD6Mxvn4XER-4wEdHzVTVogjTs77nTUN6C-rZ1Q&refresh_token=AQBIJO6k7PLDfUkiEssRec6Lqv1NuqXN7c03M8uNy2p-i6bcrGw7kMD7It37c4zl8S3eOtnmexFq0zwTiXG3h-hFSc3aR53NZqE5Rzp6LFAXF_1AMXg37IV09xZRo3iVMPs"
       }
     }).then(r=>r.json()).then((playlistObj) => {
       this.props.setSpotify(playlistObj.items)
       // .items.map((obj) => {console.log(obj.track)})
-      // console.log(playlistObj.items)
+      console.log(playlistObj.items)
       // console.log(playlistObj.items[0].track)
     })
   }
