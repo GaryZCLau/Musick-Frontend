@@ -26,13 +26,11 @@ class App extends React.Component {
       headers: {
         "content-type": "application/json",
         "accept": "application/json",
-        "Authorization": "Bearer BQD84GGsX1LobLw9eRFim__Jq6GOPqUMOibbCCpzc-zhLtFhD05hCO3lEMIvv1t3TidU8wQU7ryn9e6cM-2T2wjlOJDfTU2uPLtTWQiZDDNEIjA1XaQAIALzWlD6Mxvn4XER-4wEdHzVTVogjTs77nTUN6C-rZ1Q&refresh_token=AQBIJO6k7PLDfUkiEssRec6Lqv1NuqXN7c03M8uNy2p-i6bcrGw7kMD7It37c4zl8S3eOtnmexFq0zwTiXG3h-hFSc3aR53NZqE5Rzp6LFAXF_1AMXg37IV09xZRo3iVMPs"
+        "Authorization": "Bearer BQCVFq4QsFC2y6XfrXYT8ph7OenzwCMDQrlLLLdDD6wuDe3ohh4AhIMQqYOY-iJFRCsTUVI1QnWSPbK_po5z-XFwrJtBzvvl2jnR8n6VUB7eF7Sg9ohZhq7rc3qkLiKKkkANBvy2aowRe4kxS8nbrPuqOKwrji52&refresh_token=AQBg68jB919j4TItnLugGjnjXLaqLZk54OGuxiS7VjBUatFGRziT1g-zpKarM8Iq-jwxcHmcJ3sycircZdmpXpNkA1Gc2sP3WYXQHzKZTwYZ2TKgp1F-icip-3JjUMEfHi8"
       }
     }).then(r=>r.json()).then((playlistObj) => {
       this.props.setSpotify(playlistObj.items)
-      // .items.map((obj) => {console.log(obj.track)})
       console.log(playlistObj.items)
-      // console.log(playlistObj.items[0].track)
     })
   }
 
@@ -61,8 +59,8 @@ class App extends React.Component {
       body: JSON.stringify({
         name: registerState.name,
         password: registerState.password,
-        image: "",
-        status: ""
+        image: "https://sciences.ucf.edu/psychology/wp-content/uploads/sites/63/2019/09/No-Image-Available.png",
+        status: "Update your status!"
       })
     })
       .then(r => r.json())

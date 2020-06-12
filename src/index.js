@@ -17,7 +17,12 @@ let spotifyReducer = (state = initialSpotifyState, action) => {
     case "SET_SPOTIFY": 
       return {...state, spotifyList: action.payload}
     case "SET_RANDOM_SONGS": 
-    let randomSongList = state.spotifyList.slice(0,5)
+    function shuffle(o){ 
+      for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+      return o;
+  }
+    let randomSongList = shuffle([...state.spotifyList]).slice(0,5)
+    // let randomSongList = state.spotifyList.slice(0,5)
     // logic for random amont of song ^
       return {...state, currentPlaying: randomSongList}
     default: return state
