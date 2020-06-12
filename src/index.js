@@ -9,22 +9,29 @@ import {Provider} from 'react-redux'
 // spotify 
 let initialSpotifyState = {
   spotifyList: [],
-  currentPlaying: []
+  currentPlaying: [
+  {track: {
+            album: {images: [{}, {height: 0, url: "", width: 0}, ]}, name: "", preview_url: "", artists: [{name: ""}]
+          }
+  }
+  ]
 }
 
 let spotifyReducer = (state = initialSpotifyState, action) => {
   switch (action.type) {
     case "SET_SPOTIFY": 
       return {...state, spotifyList: action.payload}
+
     case "SET_RANDOM_SONGS": 
     function shuffle(o){ 
       for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
-      return o;
-  }
-    let randomSongList = shuffle([...state.spotifyList]).slice(0,5)
+      return o;}
+    let randomSongList = shuffle([...state.spotifyList])
+    .slice(0,8)
     // let randomSongList = state.spotifyList.slice(0,5)
     // logic for random amont of song ^
       return {...state, currentPlaying: randomSongList}
+
     default: return state
   }
 }

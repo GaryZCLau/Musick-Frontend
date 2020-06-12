@@ -26,11 +26,11 @@ class App extends React.Component {
       headers: {
         "content-type": "application/json",
         "accept": "application/json",
-        "Authorization": "Bearer BQCVFq4QsFC2y6XfrXYT8ph7OenzwCMDQrlLLLdDD6wuDe3ohh4AhIMQqYOY-iJFRCsTUVI1QnWSPbK_po5z-XFwrJtBzvvl2jnR8n6VUB7eF7Sg9ohZhq7rc3qkLiKKkkANBvy2aowRe4kxS8nbrPuqOKwrji52&refresh_token=AQBg68jB919j4TItnLugGjnjXLaqLZk54OGuxiS7VjBUatFGRziT1g-zpKarM8Iq-jwxcHmcJ3sycircZdmpXpNkA1Gc2sP3WYXQHzKZTwYZ2TKgp1F-icip-3JjUMEfHi8"
+        "Authorization": "Bearer BQDSac-Gh_2wntQu951X_AMHyfJjGGs5WNq_5Ba6H7aMRvHOq2oYNEsHFO5X77efdbsMZZgsaEl95VVRwNg8WL9yqqaSyD0SLITLZyE1V06QkSpYH6_nCqdNa5kSoR9DXrltC6xqRdSJWfOtcfCPrKydCgR8R9gD&refresh_token=AQCKU7BgM_Wb950cSFHWqIFOAtwUqdSYNVRfZLxLx0lTxPEIrDPB53LaOrJcWovEg-sZqIVvaSYRJ3BjWR3gmlaFq64UKdU0GFey14oUk10sjXOh3WJpHxPHpIi-yyNFXI8"
       }
     }).then(r=>r.json()).then((playlistObj) => {
       this.props.setSpotify(playlistObj.items)
-      console.log(playlistObj.items)
+      // console.log(playlistObj.items)
     })
   }
 
@@ -128,7 +128,6 @@ class App extends React.Component {
     // this.url = "https://p.scdn.co/mp3-preview/4d48b1d0d39b2710df6893c6a994013e9f8eee37?cid=8fcacfb4144f4d239cd08a0ad79df707";
     // this.audio = new Audio(this.url)
     // this.audio.play()
-
     // console.log(this.props)
     return (
       <div className="App">
