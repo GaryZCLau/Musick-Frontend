@@ -8,20 +8,25 @@ class GameContainer extends React.Component {
     // state for counter, hardcode [0], [1] each individual song
 
     state = {
+        gameDisplay: false,
         trackCounter: 0,
-        title: ""
+        title: "",
+        songDisplay: false
     }
 
     componentDidMount(){
+        // compartmentalizes spotify playlist
         this.props.setRandomSongs()
     }
 
+    // song counter
     handleTrackCounter = () => {
         this.setState({
             trackCounter: this.state.trackCounter + 1
         })
     }
 
+    // form change
     handleChange = (e) => {
         let {name, value} = e.target
         this.setState({
@@ -29,11 +34,30 @@ class GameContainer extends React.Component {
         })
     }
 
+    // song display
+    handleDisplay = () => {
+        this.setState({
+            songDisplay: !this.state.songDisplay
+        })
+    }
+
+    // submit song guess
     handleSubmit = (e) => {
         e.preventDefault()
         if (this.state.title.toLowerCase() === this.props.spotifyList[this.state.trackCounter].track.name.toLowerCase()) {
             this.props.handleActSubmit(this.props.spotifyList[this.state.trackCounter].track.name)
+            this.handleDisplay()
+            this.setState({
+                title: ""
+            })
         }
+    }
+
+    handleSong = () => {
+        if (this.state.songDisplay)(
+            this.handleDisplay()
+        )
+        this.handleTrackCounter()
     }
 
     render(){
@@ -48,22 +72,22 @@ class GameContainer extends React.Component {
 
         let spotifySong = this.props.spotifyList[this.state.trackCounter]
 
-        console.log(this.props.spotifyList[this.state.trackCounter])
-        console.log(this.props.spotifyList)
+        // console.log(this.props.spotifyList[this.state.trackCounter])
+        // console.log(this.props.spotifyList)
 
         // let randomSong = this.props.spotifyList[Math.floor(this.props.spotifyList.length * Math.random())]
 
         return(
             <div>
                 {/* {spotifyArray} */}
-                <Sound url={this.props.spotifyList[this.state.trackCounter].track.preview_url} volume="10" playStatus="PLAYING"/>
-                <Song trackObj={spotifySong} />
+                <Sound url={this.props.spotifyList[this.state.trackCounter].track.preview_url} volume="20" playStatus="PLAYING"/>
+                {this.state.songDisplay? <Song trackObj={spotifySong} /> : null}
                 <form onSubmit={this.handleSubmit}>
                     <label htmlFor="title">Guess:</label>
                     <input type="text" autoComplete="off" name="title" value={this.state.title} onChange={this.handleChange}/>
                     <input type="submit" value="Submit"/>
                 </form>
-                <button onClick={this.handleTrackCounter}>Next Song</button>
+                <button onClick={this.handleSong}>Next Song</button>
             </div>
         )
     }
