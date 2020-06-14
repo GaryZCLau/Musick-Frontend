@@ -35,7 +35,7 @@ class GameContainer extends React.Component {
     }
 
     // song display
-    handleDisplay = () => {
+    handleSongDisplay = () => {
         this.setState({
             songDisplay: !this.state.songDisplay
         })
@@ -46,18 +46,25 @@ class GameContainer extends React.Component {
         e.preventDefault()
         if (this.state.title.toLowerCase() === this.props.spotifyList[this.state.trackCounter].track.name.toLowerCase()) {
             this.props.handleActSubmit(this.props.spotifyList[this.state.trackCounter].track.name)
-            this.handleDisplay()
+            this.handleSongDisplay()
             this.setState({
                 title: ""
             })
         }
     }
 
+    // handles song display and counter
     handleSong = () => {
         if (this.state.songDisplay)(
-            this.handleDisplay()
+            this.handleSongDisplay()
         )
         this.handleTrackCounter()
+    }
+
+    handleGameDisplay = () => {
+        this.setState({
+            gameDisplay: !this.state.gameDisplay
+        })
     }
 
     render(){
@@ -80,14 +87,20 @@ class GameContainer extends React.Component {
         return(
             <div>
                 {/* {spotifyArray} */}
-                <Sound url={this.props.spotifyList[this.state.trackCounter].track.preview_url} volume="20" playStatus="PLAYING"/>
-                {this.state.songDisplay? <Song trackObj={spotifySong} /> : null}
-                <form onSubmit={this.handleSubmit}>
-                    <label htmlFor="title">Guess:</label>
-                    <input type="text" autoComplete="off" name="title" value={this.state.title} onChange={this.handleChange}/>
-                    <input type="submit" value="Submit"/>
-                </form>
-                <button onClick={this.handleSong}>Next Song</button>
+                {this.state.gameDisplay ? 
+                    <div>
+                        <Sound url={this.props.spotifyList[this.state.trackCounter].track.preview_url} volume="20" playStatus="PLAYING"/>
+                        {this.state.songDisplay? <Song trackObj={spotifySong} /> : null}
+                        <form onSubmit={this.handleSubmit}>
+                            <label htmlFor="title">Guess:</label>
+                            <input type="text" autoComplete="off" name="title" value={this.state.title} onChange={this.handleChange}/>
+                            <input type="submit" value="Submit"/>
+                        </form>
+                        <button onClick={this.handleSong}>Next Song</button>
+                    </div>
+                :
+                    <button className="startButton" onClick={this.handleGameDisplay}>Start Game</button>
+                }
             </div>
         )
     }
