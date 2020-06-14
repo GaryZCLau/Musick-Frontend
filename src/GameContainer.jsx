@@ -11,7 +11,9 @@ class GameContainer extends React.Component {
         gameDisplay: false,
         trackCounter: 0,
         title: "",
-        songDisplay: false
+        songDisplay: false,
+        songsGuessed: 0,
+        gameEnd: false
     }
 
     componentDidMount(){
@@ -21,9 +23,17 @@ class GameContainer extends React.Component {
 
     // song counter
     handleTrackCounter = () => {
-        this.setState({
-            trackCounter: this.state.trackCounter + 1
-        })
+        if (this.state.trackCounter < this.props.spotifyList.length - 1){
+            this.setState({
+                trackCounter: this.state.trackCounter + 1
+            })
+        } else {
+            this.handleEnd()
+            this.setState({
+                trackCounter: 0
+            })
+        }
+        
     }
 
     // form change
@@ -48,7 +58,8 @@ class GameContainer extends React.Component {
             this.props.handleActSubmit(this.props.spotifyList[this.state.trackCounter].track.name)
             this.handleSongDisplay()
             this.setState({
-                title: ""
+                title: "",
+                songsGuessed: this.state.songsGuessed + 1
             })
         }
     }
@@ -61,9 +72,18 @@ class GameContainer extends React.Component {
         this.handleTrackCounter()
     }
 
+    // handles game display after start button
     handleGameDisplay = () => {
         this.setState({
-            gameDisplay: !this.state.gameDisplay
+            gameDisplay: !this.state.gameDisplay,
+            songsGuessed: 0
+        })
+    }
+
+    // handles after last song guess
+    handleEnd = () => {
+        this.setState({
+            gameEnd: !this.state.gameEnd
         })
     }
 
@@ -77,29 +97,62 @@ class GameContainer extends React.Component {
         //     />
         // })
 
+        // console.log(this.props.spotifyList.length)
+
         let spotifySong = this.props.spotifyList[this.state.trackCounter]
+        // console.log(this.state.trackCounter)
+
+        // let spotifySong = () => {
+        //     if (this.state.trackCounter < 7) {
+        //         return this.props.spotifyList[this.state.trackCounter]
+        //     } else {
+        //         this.setState({
+        //             trackCounter: 0
+        //         })
+        //         this.handleEnd()
+        //         return this.props.spotifyList[this.state.trackCounter]
+        //     }
+        // }
 
         // console.log(this.props.spotifyList[this.state.trackCounter])
         // console.log(this.props.spotifyList)
 
         // let randomSong = this.props.spotifyList[Math.floor(this.props.spotifyList.length * Math.random())]
 
+        let trackButton = this.state.trackCounter === 6 ? "Last Song" : "Next Song"
+
         return(
             <div>
                 {/* {spotifyArray} */}
-                {this.state.gameDisplay ? 
+                {this.state.gameEnd ?
                     <div>
-                        <Sound url={this.props.spotifyList[this.state.trackCounter].track.preview_url} volume="20" playStatus="PLAYING"/>
-                        {this.state.songDisplay? <Song trackObj={spotifySong} /> : null}
-                        <form onSubmit={this.handleSubmit}>
-                            <label htmlFor="title">Guess:</label>
-                            <input type="text" autoComplete="off" name="title" value={this.state.title} onChange={this.handleChange}/>
-                            <input type="submit" value="Submit"/>
-                        </form>
-                        <button onClick={this.handleSong}>Next Song</button>
+                        <h1>The End</h1>
+                        <p>Guessed: {this.state.songsGuessed}/8</p>
                     </div>
                 :
-                    <button className="startButton" onClick={this.handleGameDisplay}>Start Game</button>
+                    <div>
+                    {this.state.gameDisplay ? 
+                        <div>
+                            <Sound url={this.props.spotifyList[this.state.trackCounter].track.preview_url} volume="20" playStatus="PLAYING"/>
+                            {this.state.songDisplay? <Song trackObj={spotifySong} /> : null}
+                            <form onSubmit={this.handleSubmit}>
+                                <label htmlFor="title">Guess:</label>
+                                <input type="text" autoComplete="off" name="title" value={this.state.title} onChange={this.handleChange}/>
+                                <input type="submit" value="Submit"/>
+                            </form>
+                            <button onClick={this.handleSong}>
+                            { this.state.trackCounter === 7 ? 
+                                "End"
+                            :
+                                trackButton
+                            }
+                            </button>
+                            <p>{this.state.songsGuessed}/8</p>
+                        </div>
+                    :
+                        <button className="startButton" onClick={this.handleGameDisplay}>Start Game</button>
+                    }
+                    </div>
                 }
             </div>
         )
