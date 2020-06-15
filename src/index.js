@@ -61,16 +61,29 @@ let userReducer = (state = initialUserState, action) => {
         token: action.payload.token,
         activities: action.payload.user.activities
       }
+
     case "DELETE_ACT":
       return {
         ...state, activities: state.activities.filter((singleAct) => {
           return singleAct.id !== action.payload.id
         })
       }
+
     case "ADD_ACT":
       return {
         ...state, activities: [...state.activities, action.payload]
       }
+
+      case "UPDATE_IMG":
+        return {
+          ...state, image: action.payload.image
+        }
+
+      case "UPDATE_STATUS": 
+        return {
+          ...state, status: action.payload.status
+        }
+
     default: return state
   }
 }

@@ -26,7 +26,7 @@ class App extends React.Component {
       headers: {
         "content-type": "application/json",
         "accept": "application/json",
-        "Authorization": "Bearer BQALA7zHQpNtnJmrMJlHHRj80cm6fuH5rTExQDoTPAEBeJkgA74ZO14EGZ2M5RPCZZOfsPuSsssj5LuVwCeqmElhMg8ZNlgaHfim_f-IAvDbhtrHm7gkRfmDkLoR31oxbI-Op9q9LQLRiXNlx9HPsIs3MQCWPw0Y&refresh_token=AQA2dLD4w0oK7Ja7vsjI6ZkrXb8630AJZku3RC4pK8SIDBewPtZ5Nj8caTOME415nD-fJgxfZ3mkVbnBdZDBuZaHuI9-N11NAT5bB0HnT3Po5Tqn3abylPZMMSE_wpmtULI"
+        "Authorization": "Bearer BQC8C4i4E4PWqUyPTWEEMjBapygPEIetdqYF3w7syHwWLoAegVNds7KMtXBYVeE2BjbBpr2ZxZI-UJES_hxE-oQnkUlp9qTTYbwjbgUHW5crGHyZ9wPufjEH2vy7IQUPgOZbJN2Sf6eRl70F0UdIKigxXs2lPWDC&refresh_token=AQDL9qva9Uzu2JXTHewm4Aqf20qXkXEbkXK4BEh-LzJUiMgQwHIRSv3RjqnXHAyVIgw7BX74SMQ6rxVmFMFsdSd9SqvzWvGet1rALzm4EFsRIR8qukWn6H3Wn5WDEFQPIDY"
       }
     }).then(r=>r.json()).then((playlistObj) => {
       this.props.setSpotify(playlistObj.items)
@@ -49,8 +49,6 @@ class App extends React.Component {
 
 
   handleRegister = (registerState) => {
-    console.log("Register form has been submitted")
-
     fetch("http://localhost:3000/users", {
       method: "POST",
       headers: {
@@ -76,7 +74,7 @@ class App extends React.Component {
 
   renderProfile = (routerProps) => {
     if (this.props.token) {
-      return <Profile deleteActivity={this.deleteActivity}/>
+      return <Profile deleteActivity={this.deleteActivity} handleUpdateImage={this.handleUpdateImage} handleUpdateStatus={this.handleUpdateStatus}/>
     } else {
       this.props.history.push("/home")
     }
@@ -88,6 +86,30 @@ class App extends React.Component {
     }).then(r => r.json())
     .then((deletedAct) => {
       this.props.deleteAct(deletedAct)
+    })
+  }
+
+  handleUpdateImage = (imageState) => {
+    fetch(`http://localhost:3000/users/${this.props.id}`, {
+      method: "PATCH",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({
+        image: imageState
+      })
+    }).then(r=>r.json()).then((updatedImg) => {
+      this.props.updateImg(updatedImg)
+    })
+  }
+
+  handleUpdateStatus = (statusState) => {
+    fetch(`http://localhost:3000/users/${this.props.id}`, {
+      method: "PATCH",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({
+        status: statusState
+      })
+    }).then(r=>r.json()).then((updatedStatus) => {
+      this.props.updateStatus(updatedStatus)
     })
   }
 
@@ -166,6 +188,20 @@ let deleteAct = (deletedAct) => {
   }
 }
 
+let updateImg = (updatedImg) => {
+  return {
+    type: "UPDATE_IMG",
+    payload: updatedImg
+  }
+}
+
+let updateStatus = (updatedStatus) => {
+  return {
+    type: "UPDATE_STATUS",
+    payload: updatedStatus
+  }
+}
+
 let newAct = (createdAct) => {
   return {
     type: "ADD_ACT",
@@ -184,7 +220,9 @@ let mapDispatchToProps = {
   setUserInfo: setUserInfo,
   setSpotify: setSpotify,
   deleteAct: deleteAct,
-  newAct: newAct
+  newAct: newAct,
+  updateImg: updateImg,
+  updateStatus: updateStatus
 }
 
 

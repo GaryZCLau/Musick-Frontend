@@ -86,6 +86,12 @@ class GameContainer extends React.Component {
             gameEnd: !this.state.gameEnd
         })
     }
+    handleEnd2 = () => {
+        this.setState({
+            gameEnd: !this.state.gameEnd,
+            songsGuessed: 0
+        })
+    }
 
     render(){
 
@@ -119,7 +125,7 @@ class GameContainer extends React.Component {
 
         // let randomSong = this.props.spotifyList[Math.floor(this.props.spotifyList.length * Math.random())]
 
-        let trackButton = this.state.trackCounter === 6 ? "Last Song" : "Next Song"
+        let nextSongButton = this.state.trackCounter === 6 ? "Last Song" : "Next Song"
 
         return(
             <div>
@@ -128,6 +134,7 @@ class GameContainer extends React.Component {
                     <div>
                         <h1>The End</h1>
                         <p>Guessed: {this.state.songsGuessed}/8</p>
+                        <button onClick={this.handleEnd2}>Play Again?</button>
                     </div>
                 :
                     <div>
@@ -144,7 +151,7 @@ class GameContainer extends React.Component {
                             { this.state.trackCounter === 7 ? 
                                 "End"
                             :
-                                trackButton
+                                nextSongButton
                             }
                             </button>
                             <p>{this.state.songsGuessed}/8</p>
