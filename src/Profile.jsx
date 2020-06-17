@@ -54,6 +54,8 @@ class Profile extends Component {
     // console.log(this.props.activities)
 
     return (
+      <div>
+
       <div className="profilebody">
 
         <button className="edit" onClick={this.handleEdit}>Settings</button>
@@ -61,9 +63,9 @@ class Profile extends Component {
         <div className="imgdiv">
         <img src={this.props.image} alt={this.props.name}/>
           {this.state.edit ? 
-          <form className="imgform" onSubmit={this.handleUpdateImage}>
-            <label htmlFor="image">URL: </label>
-            <input type="text" autoComplete="off" name="image" value={this.state.image} onChange={this.handleChange}/>
+          <form onSubmit={this.handleUpdateImage}>
+            <label htmlFor="image">URL</label>
+            <input type="text" autoComplete="off" name="image" className="imgform" value={this.state.image} onChange={this.handleChange}/>
             <input type="submit" input="" value="Update"/>
           </form>
           :
@@ -71,9 +73,9 @@ class Profile extends Component {
           }
         </div>
 
-        <div className="namediv">
-        <span className="name">{this.props.name}</span>
-        <p>{this.props.status}</p>
+        <div className="usernamediv">
+        <span className="username">{this.props.name}</span>
+        <span className="status">{this.props.status}</span>
           {this.state.edit ? 
           <form onSubmit={this.handleUpdateStatus}>
             <input type="text" autoComplete="off" name="status" value={this.state.status} onChange={this.handleChange}/>
@@ -83,17 +85,20 @@ class Profile extends Component {
           null
           }
         </div>
-        
 
+      </div>
 
         
+        {/* <div className="separator"></div> */}
+
         <div className="activity">
         <h2>Recent Activity</h2>
         <ul className="activityul">
             {arrayOfAct}
         </ul>
         </div>
-      </div>
+
+        </div>
     );
   }
 

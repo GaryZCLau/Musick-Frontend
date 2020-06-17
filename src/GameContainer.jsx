@@ -129,7 +129,6 @@ class GameContainer extends React.Component {
 
         return(
             <div className="gamediv">
-            <h1 classname="gametitle">Musik</h1>
                 {/* {spotifyArray} */}
                 {this.state.gameEnd ?
                     <div>
@@ -141,9 +140,9 @@ class GameContainer extends React.Component {
                     <div>
                     {this.state.gameDisplay ? 
                         <div>
-                            <Sound url={this.props.spotifyList[this.state.trackCounter].track.preview_url} volume="10" playStatus="PLAYING"/>
+                            <Sound url={this.props.spotifyList[this.state.trackCounter].track.preview_url} volume="1" playStatus="PLAYING"/>
                             {this.state.songDisplay? <Song trackObj={spotifySong} /> : null}
-                            <form onSubmit={this.handleSubmit}>
+                            <form className="gamesubmit" onSubmit={this.handleSubmit}>
                                 <label htmlFor="title">Guess:</label>
                                 <input type="text" autoComplete="off" name="title" value={this.state.title} onChange={this.handleChange}/>
                                 <input type="submit" value="Submit"/>
@@ -158,7 +157,10 @@ class GameContainer extends React.Component {
                             <p>{this.state.songsGuessed}/8</p>
                         </div>
                     :
+                        <div>
+                        <h1 className="gametitle">Musik</h1>
                         <button className="startButton" onClick={this.handleGameDisplay}>Start Game</button>
+                        </div>
                     }
                     </div>
                 }

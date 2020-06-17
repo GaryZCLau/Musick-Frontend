@@ -19,11 +19,9 @@ body {
 }
 
 .gametitle {
-  font-size: 50px;
+  font-size: 80px;
   font-weight: 800;
   padding-bottom: 20px
-  /* background-color: grey; */
-  /* border-bottom: solid 0.5px grey */
 }
 
 .homediv {
@@ -37,7 +35,12 @@ body {
   /* text-align: center */
 }
 .loginbutton{
-  margin-bottom: 20px
+  width: 100%;
+  background-color: black;
+  color: white;
+  padding: 14px 20px;
+  margin: 20px 0;
+  border: none;
 }
 
 .registerdiv {
@@ -47,10 +50,15 @@ body {
   text-align: center
 }
 .registerbutton {
-  margin-bottom: 20px
+  width: 100%;
+  background-color: black;
+  color: white;
+  padding: 14px 20px;
+  margin: 20px 0;
+  border: none;
 }
 
-input[type=text], [type=password]{
+.formname, .formpassword{
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -58,7 +66,7 @@ input[type=text], [type=password]{
   box-sizing: border-box;
 }
 
-input[type=submit] {
+.formsubmit {
   width: 100%;
   background-color: #4CAF50;
   color: white;
@@ -67,7 +75,7 @@ input[type=submit] {
   border: none;
 }
 
-input[type=submit]:hover {
+.formsubmit:hover {
   background-color: #45a049;
 }
 
@@ -77,34 +85,32 @@ input[type=submit]:hover {
 
 
 .profilebody {
-  text-align: center
+  text-align: center;
+  height: 250px; 
+  /* border-radius: 5px; */
+  background-color: #f2f2f2;
+  padding: 20px;
 }
 
 .edit {
-  /* float: right */
-}
-.activity {
-  /* float: right; */
-  list-style-type: none
+  float: right;
+  opacity: 0.6
 }
 
-.activityul {
-  /* margin-left: 0px; */
-  /* padding-left: 0px */
-}
-
-li {
-  list-style-type: none;
-  /* text-align: center; */
+.edit:hover {
+  opacity: 1
 }
 
 .imgdiv {
-
+  float: left;
+  /* border: solid 1px red */
 }
 
 img {
   width: 15em;
   height: 15em;
+  padding-right: 20px;
+  /* padding-left: 180px */
   /* border: solid 8px black; */
   /* background-position: 50% 50%; */
   /* background-repeat: no-repeat; */
@@ -115,19 +121,65 @@ img {
 
 .imgform {
   /* float: left */
+  width: 100%
+  /* padding: 12px 20px; */
+  /* margin: 8px 0; */
+  /* border: 1px solid #ccc; */
+  /* box-sizing: border-box; */
 }
 
-.namediv {
-  /* float: right */
+.usernamediv {
+  text-align: left;
+  padding-left: 20px;
+  /* border: solid 1px red */
 }
 
-.name {
-  font-size: 40px
+.username {
+  font-size: 40px;
+  font-weight: 800;
+  /* padding-left: 20px */
 }
 
+.status {
+  display: block;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.separator {
+  /* margin: 200px */
+}
+
+.activity {
+  /* border: solid 1px red; */
+  list-style-type: none;
+  margin-top: 50px;
+  padding-left: 200px;
+  /* background-color: #f2f2f2; */
+
+}
+    
+.activityul {
+  /* margin-left: 0px; */
+  padding-left: 0px
+}
+    
+li {
+  list-style-type: none;
+  margin-bottom: 5px;
+  /* padding-left: 0px; */
+  /* text-align: center; */
+}
 
 
 
 .gamediv {
   text-align: center
+}
+
+.gamesubmit {
+  margin-bottom: 20px;
+  margin-top: 50px
 }
