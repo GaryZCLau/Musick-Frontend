@@ -1,13 +1,72 @@
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  /* background-color: #51748c; */
+  /* color: white */
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.nav {
+  text-align: center;
+  background: black
+}
+
+.navli {
+  list-style-type: none;
+  display: inline-block;
+  margin: 2em;
+  font-weight: 400;
+  letter-spacing: .5px;
+  color: white
+  
+}
+
+.body {
+  text-align: center
+}
+
+.edit {
+  /* float: right */
+}
+.activity {
+  /* float: right; */
+  list-style-type: none
+}
+
+.activityul {
+  /* margin-left: 0px; */
+  /* padding-left: 0px */
+}
+
+li {
+  list-style-type: none;
+  /* text-align: center; */
+}
+
+.imgdiv {
+
+}
+
+img {
+  width: 15em;
+  height: 15em;
+  /* border: solid 8px black; */
+  /* background-position: 50% 50%; */
+  /* background-repeat: no-repeat; */
+  /* background-size: cover; */
+  /* float: left */
+  /* justify-self: center */
+}
+
+.imgform {
+  /* float: left */
+}
+
+.namediv {
+  /* float: right */
+}
+
+
+
+
+
+.gamediv {
+  text-align: center
 }

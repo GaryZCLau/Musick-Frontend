@@ -54,19 +54,24 @@ class Profile extends Component {
     // console.log(this.props.activities)
 
     return (
-      <div>
-        <button onClick={this.handleEdit}>Edit Profile</button>
+      <div className="body">
+        <button className="edit" onClick={this.handleEdit}>Settings</button>
+
+        <div className="imgdiv">
         <img src={this.props.image} alt={this.props.name}/>
           {this.state.edit ? 
-          <form onSubmit={this.handleUpdateImage}>
+          <form className="imgform" onSubmit={this.handleUpdateImage}>
             <label htmlFor="image">URL: </label>
             <input type="text" autoComplete="off" name="image" value={this.state.image} onChange={this.handleChange}/>
             <input type="submit" input="" value="Update"/>
           </form>
           :
-            null
+          null
           }
+        </div>
+        <div className="namediv">
         <h2>{this.props.name}</h2>
+        </div>
         <p>{this.props.status}</p>
           {this.state.edit ? 
           <form onSubmit={this.handleUpdateStatus}>
@@ -74,11 +79,14 @@ class Profile extends Component {
             <input type="submit" input="" value="Update"/>
           </form>
           :
-            null
+          null
           }
-        <ul>
+        <div className="activity">
+        <h2>Activities</h2>
+        <ul className="activityul">
             {arrayOfAct}
         </ul>
+        </div>
       </div>
     );
   }

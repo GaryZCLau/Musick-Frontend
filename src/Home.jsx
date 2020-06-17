@@ -28,8 +28,8 @@ class Home extends React.Component {
         return(
             <div>
                 <h1>Game Title</h1>
-                <p className="loginP" onClick={this.handleLogin}>Login</p>
-                <p className="registerP" onClick={this.handleRegister}>Register</p>
+                <button className="loginP" onClick={this.handleLogin}>Login</button>
+                <button className="registerP" onClick={this.handleRegister}>Register</button>
                 {this.state.formLogin ? 
                     <LoginForm handleLogin={this.props.handleLogin}/>
                     :

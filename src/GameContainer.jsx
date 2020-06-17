@@ -128,7 +128,8 @@ class GameContainer extends React.Component {
         let nextSongButton = this.state.trackCounter === 6 ? "Last Song" : "Next Song"
 
         return(
-            <div>
+            <div className="gamediv">
+            <h1>GAME TITLE</h1>
                 {/* {spotifyArray} */}
                 {this.state.gameEnd ?
                     <div>
@@ -140,7 +141,7 @@ class GameContainer extends React.Component {
                     <div>
                     {this.state.gameDisplay ? 
                         <div>
-                            <Sound url={this.props.spotifyList[this.state.trackCounter].track.preview_url} volume="20" playStatus="PLAYING"/>
+                            <Sound url={this.props.spotifyList[this.state.trackCounter].track.preview_url} volume="1" playStatus="PLAYING"/>
                             {this.state.songDisplay? <Song trackObj={spotifySong} /> : null}
                             <form onSubmit={this.handleSubmit}>
                                 <label htmlFor="title">Guess:</label>

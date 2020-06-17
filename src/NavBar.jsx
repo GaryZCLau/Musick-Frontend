@@ -2,16 +2,26 @@ import React from 'react';
 import {NavLink} from 'react-router-dom'
 
 const NavBar = () => {
+
+  const link = {
+    // width: '100px',
+    // padding: '12px',
+    margin: '0 6px 6px',
+    // background: 'darkgray',
+    textDecoration: 'none',
+    color: 'white'
+  }
+
   return(
     <ul className="nav">
-      <li>
-        <NavLink to="/home">Home</NavLink>
+      <li className="navli">
+        <NavLink to="/home" style={link} activeStyle={{color: 'yellow'}}>Home</NavLink>
       </li>
-      <li>
-        <NavLink to="/game">Game</NavLink>
+      <li className="navli">
+        <NavLink to="/game" style={link} activeStyle={{color: 'yellow'}}>Game</NavLink>
       </li>
-      <li>
-        <NavLink to="/profile">Profile</NavLink>
+      <li className="navli">
+        <NavLink to="/profile" style={link} activeStyle={{color: 'yellow'}}>Profile</NavLink>
       </li>
     </ul>
   )
