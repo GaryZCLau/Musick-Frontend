@@ -55,6 +55,7 @@ class Profile extends Component {
 
     return (
       <div className="body">
+
         <button className="edit" onClick={this.handleEdit}>Settings</button>
 
         <div className="imgdiv">
@@ -69,9 +70,9 @@ class Profile extends Component {
           null
           }
         </div>
+
         <div className="namediv">
-        <h2>{this.props.name}</h2>
-        </div>
+        <span className="name">{this.props.name}</span>
         <p>{this.props.status}</p>
           {this.state.edit ? 
           <form onSubmit={this.handleUpdateStatus}>
@@ -81,8 +82,13 @@ class Profile extends Component {
           :
           null
           }
+        </div>
+        
+
+
+        
         <div className="activity">
-        <h2>Activities</h2>
+        <h2>Recent Activity</h2>
         <ul className="activityul">
             {arrayOfAct}
         </ul>

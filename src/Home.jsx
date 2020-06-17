@@ -16,7 +16,7 @@ class Home extends React.Component {
 
     handleRegister = () => {
         this.setState({
-            formLogin: false
+            formLogin: true
         })
     }
 
