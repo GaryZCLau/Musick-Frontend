@@ -54,7 +54,7 @@ class Profile extends Component {
     // console.log(this.props.activities)
 
     return (
-      <div className="body">
+      <div className="profilebody">
 
         <button className="edit" onClick={this.handleEdit}>Settings</button>
 

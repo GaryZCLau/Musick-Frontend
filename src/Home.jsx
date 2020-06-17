@@ -16,7 +16,7 @@ class Home extends React.Component {
 
     handleRegister = () => {
         this.setState({
-            formLogin: true
+            formLogin: false
         })
     }
 
@@ -26,15 +26,19 @@ class Home extends React.Component {
         
 
         return(
-            <div>
-                <h1>Game Title</h1>
-                <button className="loginP" onClick={this.handleLogin}>Login</button>
-                <button className="registerP" onClick={this.handleRegister}>Register</button>
-                {this.state.formLogin ? 
-                    <LoginForm handleLogin={this.props.handleLogin}/>
-                    :
-                    <RegisterForm handleRegister={this.props.handleRegister}/>
-                }
+            <div className="homediv">
+                <h1 className="gametitle">Musik</h1>
+
+                <div className="logindiv">
+                <button className="loginbutton" onClick={this.handleLogin}>Login</button>
+                {this.state.formLogin ? <LoginForm handleLogin={this.props.handleLogin}/> : null}
+                </div>
+
+                <div className="registerdiv">
+                <button className="registerbutton" onClick={this.handleRegister}>Register</button>
+                {this.state.formLogin ? null : <RegisterForm handleRegister={this.props.handleRegister}/>}
+                </div>
+
             </div>
         )
     }

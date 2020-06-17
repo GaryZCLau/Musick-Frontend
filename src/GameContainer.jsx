@@ -129,7 +129,7 @@ class GameContainer extends React.Component {
 
         return(
             <div className="gamediv">
-            <h1>GAME TITLE</h1>
+            <h1 classname="gametitle">Musik</h1>
                 {/* {spotifyArray} */}
                 {this.state.gameEnd ?
                     <div>
@@ -141,7 +141,7 @@ class GameContainer extends React.Component {
                     <div>
                     {this.state.gameDisplay ? 
                         <div>
-                            <Sound url={this.props.spotifyList[this.state.trackCounter].track.preview_url} volume="1" playStatus="PLAYING"/>
+                            <Sound url={this.props.spotifyList[this.state.trackCounter].track.preview_url} volume="10" playStatus="PLAYING"/>
                             {this.state.songDisplay? <Song trackObj={spotifySong} /> : null}
                             <form onSubmit={this.handleSubmit}>
                                 <label htmlFor="title">Guess:</label>

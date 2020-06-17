@@ -18,7 +18,65 @@ body {
   
 }
 
-.body {
+.gametitle {
+  font-size: 50px;
+  font-weight: 800;
+  padding-bottom: 20px
+  /* background-color: grey; */
+  /* border-bottom: solid 0.5px grey */
+}
+
+.homediv {
+  text-align: center;
+}
+
+.logindiv {
+  float: left;
+  /* border: solid 1px red; */
+  width: 45%;
+  /* text-align: center */
+}
+.loginbutton{
+  margin-bottom: 20px
+}
+
+.registerdiv {
+  float: right;
+  /* border: solid 1px red; */
+  width: 45%;
+  text-align: center
+}
+.registerbutton {
+  margin-bottom: 20px
+}
+
+input[type=text], [type=password]{
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+
+
+
+
+
+.profilebody {
   text-align: center
 }
 
