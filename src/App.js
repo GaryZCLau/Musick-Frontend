@@ -26,7 +26,7 @@ class App extends React.Component {
       headers: {
         "content-type": "application/json",
         "accept": "application/json",
-        "Authorization": "Bearer BQAJ6NPf405E1tUp9fAPXCGacY8WhfEzkCwlIbaeeSrIHr8v3y5TvdAa2dQzPt5dFINNFvuwXMVrUNdEr_9KmJ3LHRn4v-KXw6wg4perLCouU5SOzJjw--yVGiUrw1SBZyYCYF7isVrUnk3MWxmXL6Nn3ORjQ9xo&refresh_token=AQAYFZ01yVWasxqpc22zw8whaydjqBQhifiqEF3iiE9445MDfAdZyTiN9NR-1qzpyDHowRWZWS4S82o2KQdGaqEzK3vgACHc5XE7hp5Ywpw2yrvN9WkVzPRTXjcGUnwta5c"
+        "Authorization": "Bearer BQBUsQEKwKQZX3fsqaD7BVGZolev8dXF7Y3zZLruCge3TpqRP00t15aTOSeB-Eydj40OAiGn5t3Lq5jMfY-duAQoZwMR_FT1tYTHyrDDrV17aSddLJ9fdiz4NyIuJv82AY58T-IUYMmjLh-QAgIvGnLUFbJrIbno&refresh_token=AQC0H8XXRQ978SOBsRFx7yJTfgBSNk1caJ_kZWBA2qA8xHulkQM7_pC8EgmTdIWgGOAqOZNz3-vd21c7IeipcutCMRYwPVV9c7JorLM9JrVyS4x3A89dlMFdeWRV324fies"
       }
     }).then(r=>r.json()).then((playlistObj) => {
       this.props.setSpotify(playlistObj.items)
