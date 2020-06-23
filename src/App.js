@@ -30,7 +30,7 @@ class App extends React.Component {
       }
     }).then(r=>r.json()).then((playlistObj) => {
       this.props.setSpotify(playlistObj.items)
-      // console.log(playlistObj.items)
+      console.log(playlistObj.items)
     })
   }
 
