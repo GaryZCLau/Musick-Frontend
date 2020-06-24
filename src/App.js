@@ -30,12 +30,12 @@ class App extends React.Component {
       }
     }).then(r=>r.json()).then((playlistObj) => {
       this.props.setSpotify(playlistObj.items)
-      console.log(playlistObj.items)
+      // console.log(playlistObj.items)
     })
   }
 
   handleLogin = (loginState) => {
-    console.log("Login form has been submitted")
+    // console.log("Login form has been submitted")
     fetch("http://localhost:3000/users/login", {
       method: "POST",
       headers: {
