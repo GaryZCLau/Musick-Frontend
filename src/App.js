@@ -68,7 +68,6 @@ class App extends React.Component {
   handleResponse = (resp) => {
     localStorage.token = resp.token
     this.props.setUserInfo(resp)
-    // console.log(resp)
     this.props.history.push("/profile")
   }
 
