@@ -153,8 +153,11 @@ class App extends React.Component {
     return (
       <div className="App">
         <NavBar/>
+
+        {/* options for sound */}
         {/* <Sound url="https://p.scdn.co/mp3-preview/4d48b1d0d39b2710df6893c6a994013e9f8eee37?cid=8fcacfb4144f4d239cd08a0ad79df707" volume="10" playStatus="PLAYING"/> */}
         {/* <iframe src="https://p.scdn.co/mp3-preview/4d48b1d0d39b2710df6893c6a994013e9f8eee37?cid=8fcacfb4144f4d239cd08a0ad79df707" title="song"></iframe> */}
+        
         <Switch>
           <Route path="/home" render={this.renderHome}/>
           <Route path="/game" render={this.renderGame}/>
