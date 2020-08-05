@@ -26,7 +26,7 @@ class App extends React.Component {
       headers: {
         "content-type": "application/json",
         "accept": "application/json",
-        "Authorization": "Bearer BQC8BMZWxcTQtQFCLtEFf9Bnjk6mT3NgGe5uIc_75p6rP-Ofm_y3dUwLy25uW61EspXkgavDnNMNJIAac-SfccWC0BwO1oXFf4T9QGHPf15Xy7oZPvQ-YkpK5XJISuHfQ2z5i3iEBhQb3icIg_hFDi8zNf7PvFQh&refresh_token=AQBU-giWgzogj5y88CZ8bBQAfinwXk1N1q9XfLPi2uYYeYO70E6vJxdk47GAWVZzWNR_qwMhrA4CbPVBeZc1kIBCxI_-JzGAEVycAWghILTwAKkPEr6CMtJ28OO8mk7oEA8"
+        "Authorization": "Bearer BQDc9jCVNKi-9JkQkf5FOMKxgcjYTPfDVso-YFSu1Gx1caL13k-y7pAOS9TK2uythzMeXB-L4fXpBUvTKkJoEzfjBTgvWRahpxuX1Fd0cCB9kqjJNycypCzRtiE1bLhrrPJgEUXeZD3Z-rmSy2dSKnCbYiFT0YSs&refresh_token=AQDurLxi5Rk74-LNbmIN2goMOWUxP4hrMxKf1qQzSr9P7oNQe5RLciICKMchLtkKiOR7fEZrQjiB5dWaNDbBu1hqhqr0KuX7TWOwztBNfWMtUiFyFmmGSrk-ORqNG2BiE-M"
       }
     }).then(r=>r.json()).then((playlistObj) => {
       this.props.setSpotify(playlistObj.items)

@@ -15,7 +15,7 @@ class Activities extends React.Component {
             <li>
                 Guessed: {this.props.actObj.title}
                 {this.props.editStatus? 
-                    <button onClick={this.handleDelete}>X</button>
+                    <button className="actbtn" onClick={this.handleDelete}>X</button>
                 : 
                     null
                 }

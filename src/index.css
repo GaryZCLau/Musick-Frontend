@@ -1,7 +1,7 @@
-body {
-  /* background-color: #51748c; */
-  /* color: white */
-}
+/* body {
+  background-color: #51748c;
+  color: white
+} */
 
 .nav {
   text-align: center;
@@ -94,11 +94,16 @@ body {
 
 .edit {
   float: right;
-  opacity: 0.6
+  opacity: 0.6;
+  margin-left: 15px
 }
 
 .edit:hover {
   opacity: 1
+}
+
+.signoutbtn {
+  float:right;
 }
 
 .imgdiv {
@@ -128,6 +133,10 @@ img {
   /* box-sizing: border-box; */
 }
 
+.imgbtn {
+  margin-top: 5px
+}
+
 .usernamediv {
   text-align: left;
   padding-left: 20px;
@@ -148,9 +157,13 @@ img {
   margin-right: 0;
 }
 
-.separator {
-  /* margin: 200px */
+.statusbtn {
+  margin-left: 15px
 }
+
+/* .separator {
+  margin: 200px
+} */
 
 .activity {
   /* border: solid 1px red; */
@@ -173,7 +186,9 @@ li {
   /* text-align: center; */
 }
 
-
+.actbtn {
+  margin-left: 15px
+}
 
 .gamediv {
   text-align: center

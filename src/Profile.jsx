@@ -60,20 +60,19 @@ class Profile extends Component {
     return (
       <div>
 
-      {this.state.edit ? <button className="signout" onClick={this.handleSignOut}>Sign Out</button> : null}
 
       <div className="profilebody">
-
         <button className="edit" onClick={this.handleEdit}>Settings</button>
-
+        
+        {this.state.edit ? <button className="signoutbtn" onClick={this.handleSignOut}>Sign Out</button> : null}
 
         <div className="imgdiv">
         <img src={this.props.image} alt={this.props.name}/>
           {this.state.edit ? 
           <form onSubmit={this.handleUpdateImage}>
-            <label htmlFor="image">URL</label>
+            <label htmlFor="image">IMG URL:</label>
             <input type="text" autoComplete="off" name="image" className="imgform" value={this.state.image} onChange={this.handleChange}/>
-            <input type="submit" input="" value="Update"/>
+            <input className="imgbtn" type="submit" input="" value="Update"/>
           </form>
           :
           null
@@ -86,7 +85,7 @@ class Profile extends Component {
           {this.state.edit ? 
           <form onSubmit={this.handleUpdateStatus}>
             <input type="text" autoComplete="off" name="status" value={this.state.status} onChange={this.handleChange}/>
-            <input type="submit" input="" value="Update"/>
+            <input className="statusbtn" type="submit" input="" value="Update"/>
           </form>
           :
           null
