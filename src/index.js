@@ -84,6 +84,17 @@ let userReducer = (state = initialUserState, action) => {
           ...state, status: action.payload.status
         }
 
+      case "SIGN_OUT":
+        return {
+          ...state, 
+          id: 0,
+          name: "",
+          status: "",
+          image: "",
+          token: "",
+          activities: []
+        }
+
     default: return state
   }
 }

@@ -26,7 +26,7 @@ class App extends React.Component {
       headers: {
         "content-type": "application/json",
         "accept": "application/json",
-        "Authorization": "Bearer BQCPQSL34TUPCovJxDHMVe4l6APGMVAIQ3z0oyULnOCaOStyaC1_ePTo05Q-4_WgZ6t9kplCp_kLV0DvFZ5Eqau9Gf5-dZh2gfvj7HLb4ZIAs4rS64ce-VKXeu4UNizM5noratpECV4-gcbkSoM8v_o6qfsk5qlL&refresh_token=AQBUqoK9ZrHrnKVOi4h2VwB5XFqt52k-obrft4dWt5VnzjxjePxTUvIznQ-a15H4tBMB0YSkcl1iw_kakrR7eyadbNrkq2di8Sro-_pZkTKXt-Rb_Mtmkw6pvAdsSEHnuhc"
+        "Authorization": "Bearer BQC8BMZWxcTQtQFCLtEFf9Bnjk6mT3NgGe5uIc_75p6rP-Ofm_y3dUwLy25uW61EspXkgavDnNMNJIAac-SfccWC0BwO1oXFf4T9QGHPf15Xy7oZPvQ-YkpK5XJISuHfQ2z5i3iEBhQb3icIg_hFDi8zNf7PvFQh&refresh_token=AQBU-giWgzogj5y88CZ8bBQAfinwXk1N1q9XfLPi2uYYeYO70E6vJxdk47GAWVZzWNR_qwMhrA4CbPVBeZc1kIBCxI_-JzGAEVycAWghILTwAKkPEr6CMtJ28OO8mk7oEA8"
       }
     }).then(r=>r.json()).then((playlistObj) => {
       this.props.setSpotify(playlistObj.items)
@@ -73,7 +73,7 @@ class App extends React.Component {
 
   renderProfile = (routerProps) => {
     if (this.props.token) {
-      return <Profile deleteActivity={this.deleteActivity} handleUpdateImage={this.handleUpdateImage} handleUpdateStatus={this.handleUpdateStatus}/>
+      return <Profile deleteActivity={this.deleteActivity} handleUpdateImage={this.handleUpdateImage} handleUpdateStatus={this.handleUpdateStatus} handleSignOut={this.handleSignOut}/>
     } else {
       this.props.history.push("/home")
     }
@@ -110,6 +110,11 @@ class App extends React.Component {
     }).then(r=>r.json()).then((updatedStatus) => {
       this.props.updateStatus(updatedStatus)
     })
+  }
+
+  handleSignOut = () => {
+    localStorage.clear()
+    this.props.signOut()
   }
 
   renderHome = () => {
@@ -211,6 +216,12 @@ let newAct = (createdAct) => {
   }
 }
 
+let signOut = () => {
+  return {
+    type: "SIGN_OUT",
+  }
+}
+
 let mapStateToProps = (globalState) => {
   return {
     token: globalState.userInformation.token,
@@ -224,7 +235,8 @@ let mapDispatchToProps = {
   deleteAct: deleteAct,
   newAct: newAct,
   updateImg: updateImg,
-  updateStatus: updateStatus
+  updateStatus: updateStatus,
+  signOut: signOut
 }
 
 

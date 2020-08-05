@@ -40,6 +40,10 @@ class Profile extends Component {
     })
   }
 
+  handleSignOut = () => {
+    this.props.handleSignOut()
+  }
+
   render() {
 
     let arrayOfAct = this.props.activities.map((singleActObj) => {
@@ -56,9 +60,12 @@ class Profile extends Component {
     return (
       <div>
 
+      {this.state.edit ? <button className="signout" onClick={this.handleSignOut}>Sign Out</button> : null}
+
       <div className="profilebody">
 
         <button className="edit" onClick={this.handleEdit}>Settings</button>
+
 
         <div className="imgdiv">
         <img src={this.props.image} alt={this.props.name}/>

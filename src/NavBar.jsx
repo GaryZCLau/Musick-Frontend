@@ -15,13 +15,13 @@ const NavBar = () => {
   return(
     <ul className="nav">
       <li className="navli">
-        <NavLink to="/home" style={link} activeStyle={{color: 'yellow'}}>Home</NavLink>
+        <NavLink to="/home" style={link} activeStyle={{color: 'green'}}>Home</NavLink>
       </li>
       <li className="navli">
-        <NavLink to="/game" style={link} activeStyle={{color: 'yellow'}}>Game</NavLink>
+        <NavLink to="/game" style={link} activeStyle={{color: 'green'}}>Game</NavLink>
       </li>
       <li className="navli">
-        <NavLink to="/profile" style={link} activeStyle={{color: 'yellow'}}>Profile</NavLink>
+        <NavLink to="/profile" style={link} activeStyle={{color: 'green'}}>Profile</NavLink>
       </li>
     </ul>
   )
