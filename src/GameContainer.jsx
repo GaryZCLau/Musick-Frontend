@@ -158,7 +158,7 @@ class GameContainer extends React.Component {
                         </div>
                     :
                         <div>
-                        <h1 className="gametitle">Musik</h1>
+                        <h1 className="gametitle">Musick</h1>
                         <button className="startButton" onClick={this.handleGameDisplay}>Start Game</button>
                         </div>
                     }
